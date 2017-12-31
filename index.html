@@ -14,15 +14,19 @@
       <h1>Docker Viewer</h1>
       <div class="panel panel-default">
         <div class="panel-heading">Docker System Info</div>
-        <div class="panel-body" id="system-info">
-          <script>
-            require('./panels/sys-info.js')
-          </script>
+        <div class="panel-body">
+          <p><button class="btn btn-sm btn-info" id="btn-sys-info-refresh">Refresh</button></p>
+          <div id="system-info">
+            <script>
+              require('./panels/sys-info.js')
+            </script>
+          </div>
         </div>
       </div>
       <div class="panel panel-default">
         <div class="panel-heading">Containers</div>
         <div class="panel-body">
+          <p><button class="btn btn-sm btn-info" id="btn-containers-refresh">Refresh</button></p>
           <table class="table table-bordered table-striped">
             <thead>
               <tr>

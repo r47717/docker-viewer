@@ -36,7 +36,27 @@ async function getRunningContainers() {
 }
 
 
+async function getContainerInfo(id) {
+  const containers = await docker.container.list();
+
+  for (let container of containers) {
+    if (id === container.data.Id) {
+      return {
+        name: container.data.Names[0],
+        id: container.data.Id,
+        image: container.data.Image,
+        network: Object.keys(container.data.NetworkSettings.Networks)[0]
+      }
+    }
+  }
+
+  return {}
+}
+
+
 module.exports = {
   getSysInfo,
-  getRunningContainers
+  getRunningContainers,
+  getContainerInfo
 }
+
