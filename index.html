@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Docker Viewer</title>
+    <script>
+      $ = jQuery = require('jquery')
+      require('bootstrap')
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Docker Viewer</h1>
+      <div class="panel panel-default">
+        <div class="panel-heading">Docker System Info</div>
+        <div class="panel-body" id="system-info">
+          <script>
+            require('./panels/sys-info.js')
+          </script>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Containers</div>
+        <div class="panel-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Network</th>
+              </tr>
+            </thead>
+            <tbody id="containers-list">
+              <script>
+                require('./panels/containers.js')
+              </script>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

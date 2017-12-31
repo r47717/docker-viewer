@@ -1,0 +1,19 @@
+{
+  "name": "docker-viewer-app",
+  "version": "1.0.0",
+  "description": "Docker viewer application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/r47717/docker-viewer",
+  "author": "r47717",
+  "devDependencies": {
+    "electron": "~1.7.8"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "node-docker-api": "^1.1.18"
+  }
+}
