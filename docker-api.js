@@ -54,9 +54,30 @@ async function getContainerInfo(id) {
 }
 
 
+async function createNewImage(data) {
+
+}
+
+
+async function createNewContainer(image, name, start = true) {
+  const container = await docker.container.create({
+    Image: image,
+    name
+  })
+
+  if (start) {
+    return container.start()
+  }
+
+  return container
+}
+
+
 module.exports = {
   getSysInfo,
   getRunningContainers,
-  getContainerInfo
+  getContainerInfo,
+  createNewImage,
+  createNewContainer
 }
 

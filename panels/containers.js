@@ -1,4 +1,4 @@
-const { dialog } = require('electron').remote
+const { dialog, ipcRenderer } = require('electron').remote
 const api = require('../docker-api.js')
 const btnRefresh = $("#btn-containers-refresh")
 

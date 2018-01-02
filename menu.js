@@ -11,9 +11,9 @@ function notImplemented() {
 }
 
 
-function createMenu(onNewContainer, onNewImage, onAbout) {
-  onNewContainer = onNewContainer || notImplemented
+function createMenu(onNewImage, onNewContainer, onAbout) {
   onNewImage = onNewImage || notImplemented
+  onNewContainer = onNewContainer || notImplemented
   onAbout = onAbout || notImplemented
 
   const template = [
@@ -21,12 +21,12 @@ function createMenu(onNewContainer, onNewImage, onAbout) {
       label: 'File',
       submenu: [
         {
-          label: 'New Container...',
-          click () { onNewContainer() }
-        },
-        {
           label: 'New Image...',
           click () { onNewImage() }
+        },
+        {
+          label: 'New Container...',
+          click () { onNewContainer() }
         },
         {type: 'separator'},
         {role: 'quit'}

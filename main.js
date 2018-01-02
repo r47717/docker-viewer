@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 const path = require('path')
 const url = require('url')
 const createMenu = require('./menu')
+const createNewContainer = require('./new-container')
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -9,7 +10,7 @@ const createMenu = require('./menu')
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 1200, height: 900})
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
@@ -27,7 +28,7 @@ function createWindow () {
     mainWindow = null
   })
 
-  Menu.setApplicationMenu(createMenu())
+  mainWindow.setMenu(createMenu(null, createNewContainer(mainWindow)))
 }
 
 // This method will be called when Electron has finished
