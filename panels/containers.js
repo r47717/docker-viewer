@@ -11,19 +11,20 @@ const updateContainerInfo = () => {
 
     for (let container of data) {
       tbody.append(
-        `<tr>
-        <td><a href="#" id="${container.id}">${container.name}</a></td>
+        `<tr id="${container.id}">
+        <td><a href="#">${container.name}</a><button class="btn btn-sm btn-danger pull-right" title="Delete">X</button></td>
         <td>${container.id}</td>
         <td>${container.image}</td>
         <td>${container.network}</td>
         </tr>`
       )
-      $(`#${container.id}`).click((e) => {
+      
+      $(`#${container.id} a`).click((e) => {
         e.preventDefault()
         e.stopPropagation()
-        const elem = $(e.target)
+        const elem = $(e.target).parent().parent()
         const id = elem.attr('id')
-        
+
         api.getContainerInfo(id).then((info) => {
           let str = "";
           for (let param in info) {
@@ -37,6 +38,18 @@ const updateContainerInfo = () => {
           })
         })
       })
+      
+      $(`#${container.id} button`).click((e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const elem = $(e.target).parent().parent()
+        const id = elem.attr('id')
+
+        api.deleteContainer(id).then(() => {
+          updateContainerInfo()
+        })
+      })
+
     }
     btnRefresh.html('Refresh')
   });

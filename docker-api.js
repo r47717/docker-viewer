@@ -20,9 +20,9 @@ async function getSysInfo() {
 
 
 async function getRunningContainers() {
-  const containers = await docker.container.list();
+  const containers = await docker.container.list({all: true});
   const list = []
-  for (let container of containers) {
+  for (let container of containers) { 
     console.log(container)
     list.push({
       name: container.data.Names[0],
@@ -37,10 +37,10 @@ async function getRunningContainers() {
 
 
 async function getContainerInfo(id) {
-  const containers = await docker.container.list();
+  const containers = await docker.container.list({all: true});
 
   for (let container of containers) {
-    if (id === container.data.Id) {
+    if (container.id === id) {
       return {
         name: container.data.Names[0],
         id: container.data.Id,
@@ -73,11 +73,25 @@ async function createNewContainer(image, name, start = true) {
 }
 
 
+async function deleteContainer(id) {
+  const containers = await docker.container.list({all: true});
+
+  for (let container of containers) {
+    if (container.id === id) {
+      return container.delete({force: true})
+    }  
+  }
+
+  return false
+}
+
+
 module.exports = {
   getSysInfo,
   getRunningContainers,
   getContainerInfo,
   createNewImage,
-  createNewContainer
+  createNewContainer,
+  deleteContainer
 }
 
