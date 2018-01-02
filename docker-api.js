@@ -28,7 +28,8 @@ async function getRunningContainers() {
       name: container.data.Names[0],
       id: container.data.Id,
       image: container.data.Image,
-      network: Object.keys(container.data.NetworkSettings.Networks)[0]
+      network: Object.keys(container.data.NetworkSettings.Networks)[0],
+      state: container.data.State
     })
   }
 
@@ -45,7 +46,8 @@ async function getContainerInfo(id) {
         name: container.data.Names[0],
         id: container.data.Id,
         image: container.data.Image,
-        network: Object.keys(container.data.NetworkSettings.Networks)[0]
+        network: Object.keys(container.data.NetworkSettings.Networks)[0],
+        state: container.data.State
       }
     }
   }
@@ -86,12 +88,40 @@ async function deleteContainer(id) {
 }
 
 
+async function startContainer(id) {
+  const containers = await docker.container.list({all: true});
+
+  for (let container of containers) {
+    if (container.id === id) {
+      return container.start()
+    }  
+  }
+
+  return false
+}
+
+
+async function stopContainer(id) {
+  const containers = await docker.container.list({all: true});
+
+  for (let container of containers) {
+    if (container.id === id) {
+      return container.stop()
+    }  
+  }
+
+  return false
+}
+
+
 module.exports = {
   getSysInfo,
   getRunningContainers,
   getContainerInfo,
   createNewImage,
   createNewContainer,
-  deleteContainer
+  deleteContainer,
+  startContainer,
+  stopContainer
 }
 

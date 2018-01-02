@@ -10,12 +10,17 @@ const updateContainerInfo = () => {
     tbody.html("")
 
     for (let container of data) {
+
+      const buttonStartStop = (container.state === 'running') 
+        ? `<button class="btn btn-sm btn-info pull-right btn-stop" title="Stop container">Stop</button>`
+        : `<button class="btn btn-sm btn-info pull-right btn-start" title="Start container">Start</button>`
+
       tbody.append(
         `<tr id="${container.id}">
-        <td><a href="#">${container.name}</a><button class="btn btn-sm btn-danger pull-right" title="Delete">X</button></td>
-        <td>${container.id}</td>
+        <td><a href="#">${container.name}</a><button class="btn btn-sm btn-danger pull-right btn-delete" title="Delete container">Delete</button></td>
         <td>${container.image}</td>
         <td>${container.network}</td>
+        <td>${container.state}${buttonStartStop}</td>
         </tr>`
       )
       
@@ -39,13 +44,35 @@ const updateContainerInfo = () => {
         })
       })
       
-      $(`#${container.id} button`).click((e) => {
+      $(`#${container.id} button.btn-delete`).click((e) => {
         e.preventDefault()
         e.stopPropagation()
         const elem = $(e.target).parent().parent()
         const id = elem.attr('id')
 
         api.deleteContainer(id).then(() => {
+          updateContainerInfo()
+        })
+      })
+      
+      $(`#${container.id} button.btn-start`).click((e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const elem = $(e.target).parent().parent()
+        const id = elem.attr('id')
+
+        api.startContainer(id).then(() => {
+          updateContainerInfo()
+        })
+      })
+      
+      $(`#${container.id} button.btn-stop`).click((e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const elem = $(e.target).parent().parent()
+        const id = elem.attr('id')
+
+        api.stopContainer(id).then(() => {
           updateContainerInfo()
         })
       })
