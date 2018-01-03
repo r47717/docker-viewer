@@ -25,24 +25,55 @@
         </div>
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">Containers</div>
         <div class="panel-body">
-          <p><button class="btn btn-sm btn-info" id="btn-containers-refresh">Refresh</button></p>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Image</th>
-                <th>Network</th>
-                <th>State</th>
-              </tr>
-            </thead>
-            <tbody id="containers-list">
-              <script>
-                require('./panels/containers.js')
-              </script>
-            </tbody>
-          </table>
+
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#images-tab">Images</a></li>
+            <li><a data-toggle="tab" href="#containers-tab">Containers</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="images-tab" class="tab-pane fade in active">
+              <h3>Images</h3>
+              <p><button class="btn btn-sm btn-info" id="btn-images-refresh">Refresh</button></p>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Labels</th>
+                    <th>Created</th>
+                    <th>Size</th>
+                    <th>Containers</th>
+                  </tr>
+                </thead>
+                <tbody id="images-list">
+                  <script>
+                    require('./panels/images.js')
+                  </script>
+                </tbody>
+              </table>
+            </div>
+            <div id="containers-tab" class="tab-pane fade">
+              <h3>Containers</h3>
+              <p><button class="btn btn-sm btn-info" id="btn-containers-refresh">Refresh</button></p>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Network</th>
+                    <th>State</th>
+                  </tr>
+                </thead>
+                <tbody id="containers-list">
+                  <script>
+                    require('./panels/containers.js')
+                  </script>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

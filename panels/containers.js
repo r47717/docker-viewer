@@ -3,7 +3,7 @@ const api = require('../docker-api.js')
 const btnRefresh = $("#btn-containers-refresh")
 
 const updateContainerInfo = () => {
-  const list = api.getRunningContainers()
+  const list = api.listContainers()
 
   list.then(data => {
     const tbody = $("#containers-list");  
