@@ -23,7 +23,7 @@ function createDialogWindow(parent) {
     slashes: true
   }))
 
-  dialogWindow.setMenu(null)
+  //dialogWindow.setMenu(null)
 
   dialogWindow.on('closed', function () {
     dialogWindow = null

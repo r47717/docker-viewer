@@ -17,7 +17,7 @@ const updateImageInfo = () => {
       tbody.append(
         `<tr id="${id}">
         <td>${image.id}<button class="btn btn-sm btn-danger pull-right btn-delete" title="Delete image">Delete</button></td>
-        <td>${image.labels}</td>
+        <td>${image.tag}</td>
         <td>${image.created}</td>
         <td>${image.size}</td>
         <td>${image.containers}</td>

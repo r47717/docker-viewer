@@ -27,12 +27,13 @@ async function listImages() {
   const list = []
 
   for (let image of images) {
-    //console.log(image)
+    console.log(image)
     list.push({
       id: image.data.Id,
       containers: image.data.Containers,
       created: image.data.Created,
       size: image.data.Size,
+      tag: image.data.RepoTags.length ? image.data.RepoTags[0] : '',
       labels: (image.data.Labels && image.data.Labels.length) ? image.data.Labels[0] : ''
     })
   }
