@@ -1,5 +1,7 @@
 const api = require('../docker-api.js')
 const btnRefresh = $("#btn-images-refresh")
+const btnDeleteAll = $("#btn-images-delete-all")
+
 
 const updateImageInfo = () => {
   const list = api.listImages()
@@ -50,5 +52,16 @@ updateImageInfo()
 btnRefresh.click(() => {
   btnRefresh.html('Refreshing...')
   updateImageInfo()
+})
+
+
+btnDeleteAll.click(() => {
+  api.deleteAllImages()
+    .then(() => {
+      updateImageInfo()
+    })
+    .catch(() => {
+      updateImageInfo()
+    })
 })
 

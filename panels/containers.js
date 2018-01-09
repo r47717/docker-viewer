@@ -1,6 +1,8 @@
 const { dialog, ipcRenderer } = require('electron').remote
 const api = require('../docker-api.js')
 const btnRefresh = $("#btn-containers-refresh")
+const btnDeleteAll = $("#btn-containers-delete-all")
+
 
 const updateContainerInfo = () => {
   const list = api.listContainers()
@@ -91,3 +93,13 @@ btnRefresh.click(() => {
   updateContainerInfo()
 })
 
+
+btnDeleteAll.click(() => {
+  api.deleteAllContainers()
+    .then(() => {
+      updateContainerInfo()
+    })
+    .catch(() => {
+      updateContainerInfo()
+    })
+})

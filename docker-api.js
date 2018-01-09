@@ -64,7 +64,22 @@ async function getImageInfo(id) {
 
 async function deleteImage(id) {
   const image = await getImageById(id)
-  return image.remove()
+  return image.remove().catch((e) => {
+    console.log(`cannot delete image ${image.data.Id}: ${e}`)
+  })
+}
+
+
+async function deleteAllImages() {
+  const list = await docker.image.list({all: true})
+
+  for (let image of list) {
+    try {
+      await image.remove()
+    } catch(e) {
+      console.log(`skipped deleting image ${image.data.Id}`)
+    }
+  }
 }
 
 
@@ -147,6 +162,15 @@ async function deleteContainer(id) {
 }
 
 
+async function deleteAllContainers() {
+  const containers = await docker.container.list({all: true});
+
+  for (let container of containers) {
+      await container.delete({force: true})
+  }
+}
+
+
 async function startContainer(id) {
   const containers = await docker.container.list({all: true});
 
@@ -181,11 +205,13 @@ module.exports = {
   getImageInfo,
   pullImage,
   deleteImage,
+  deleteAllImages,
 
   listContainers,
   getContainerInfo,
   createNewContainer,
   deleteContainer,
+  deleteAllContainers,
   startContainer,
   stopContainer
 }
