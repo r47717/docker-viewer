@@ -1,8 +1,8 @@
 const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 const path = require('path')
 const url = require('url')
-const createMenu = require('./menu')
-const createNewContainer = require('./new-container')
+const createMenu = require('./windows/main/menu')
+const createNewContainer = require('./windows/new-container/new-container')
 
 
 // Keep a global reference of the window object, if you don't, the window will

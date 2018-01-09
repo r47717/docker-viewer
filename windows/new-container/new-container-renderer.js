@@ -1,7 +1,7 @@
 const $ = jQuery = require('jquery')
 require('bootstrap')
 const { ipcRenderer } = require('electron')
-const api = require('./docker-api')
+const api = require('../../docker-api')
 
 const containerName = $('input[name="container-name"]')
 const imageName = $('input[name="image-name"]')

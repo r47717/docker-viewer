@@ -1,4 +1,4 @@
-const api = require('../docker-api.js')
+const api = require('../../docker-api.js')
 
 
 const updateSysInfo = () => {

@@ -1,7 +1,7 @@
 const path = require('path')
 const url = require('url')
 const { BrowserWindow, dialog, ipcMain } = require('electron')
-const api = require('./docker-api')
+const api = require('../../docker-api')
 
 
 let mainWindow
