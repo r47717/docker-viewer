@@ -1,3 +1,9 @@
 # Docker Viewer
 
-Simple Electron application showing Docker system info and running containers
+Electron based desktop UI application to manage local Docker system through Docker API and Unix sockets:
+- show Docker system info;
+- list available images, delete, delete all;
+- list available containers, start, stop, delete, delete all;
+- create new containers based on available images;
+
+Tested on Fedora and Ubuntu.
