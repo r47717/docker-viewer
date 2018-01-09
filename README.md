@@ -4,6 +4,6 @@ Electron based desktop UI application to manage local Docker system through Dock
 - show Docker system info;
 - list available images, delete, delete all;
 - list available containers, start, stop, delete, delete all;
-- create new containers based on available images;
+- create new images and new containers based on available images;
 
 Tested on Fedora and Ubuntu.
