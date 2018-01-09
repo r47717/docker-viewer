@@ -3,25 +3,19 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>Create New Container</title>
+    <title>Create New Image</title>
   </head>
   <body>
     <div class="container">
-      <h1>Create New Container</h1>
-      <p>Available Images:</p>
-      <p>
-        <select id="select-image-names" class="form-control">
-        </select>
-      </p>
-      <p><input class="form-control" placeholder="Container name" name="container-name"></input></p>
-      <p><input type="checkbox" name="container-start">&nbsp;&nbsp;Start container after creation</input></p>
+      <h1>Create New Image</h1>
+      <p><input class="form-control" placeholder="Image name" name="image-name"></input></p>
       <p>
         <button class="btn btn-success" id="btn-create" disabled>Create</button>
         <button class="btn btn-danger pull-right" id="btn-cancel">Cancel</button>
       </p>
     </div>
     <script>
-      require('./new-container-renderer.js')
+      require('./new-image-renderer.js')
     </script>
   </body>
 </html>

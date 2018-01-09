@@ -18,7 +18,7 @@ function createDialogWindow(parent) {
   })
 
   dialogWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'new-container.html'),
+    pathname: path.join(__dirname, 'new-image.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -31,34 +31,39 @@ function createDialogWindow(parent) {
 }
 
 
-function createNewContainer(mainWindow) {
+function createNewImage(mainWindow) {
   return () => {
     createDialogWindow(mainWindow)
   }
 }
 
 
-ipcMain.on('new-container-dialog-cancel', () => {
+ipcMain.on('new-image-dialog-cancel', () => {
   dialogWindow.close()
   dialogWindow = null
 })
 
 
-ipcMain.on('new-container-dialog-create', (event, data) => {
+ipcMain.on('new-image-dialog-create', (event, data) => {
   data = JSON.parse(data)
 
-  api.createNewContainer(data.imageName, data.containerName, data.containerStart)
+  dialogWindow.setTitle(`Creating Image '${data.imageName}'...`)
+
+  api.createNewImage(data.imageName)
     .then(() => {
-      console.log('container created')
+      console.log('image created')
+      dialogWindow.setTitle(`Creating Image done`)
+      dialogWindow.close()
+      dialogWindow = null
       mainWindow.webContents.reload()
     })
     .catch((e) => {
-      console.log('container create error: ' + e)
+      console.log('image create error: ' + e)
+      dialogWindow.setTitle(`Creating Image error`)
+      dialogWindow.close()
+      dialogWindow = null
     })
-
-  dialogWindow.close()
-  dialogWindow = null
 })
 
 
-module.exports = createNewContainer
+module.exports = createNewImage

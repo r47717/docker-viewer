@@ -84,13 +84,18 @@ async function deleteAllImages() {
 }
 
 
-async function pullImage(data) {
+const promisifyStream = (stream) => new Promise((resolve, reject) => {
+  stream.on('data', (d) => console.log(d.toString()))
+  stream.on('end', resolve)
+  stream.on('error', reject)
+})
 
-}
 
-
-async function createNewImage(data) {
-
+async function createNewImage(name) {
+  return docker.image.create({}, { 
+    fromImage: name, 
+    tag: 'latest' 
+  }).then(stream => promisifyStream(stream))
 }
 
 
@@ -204,7 +209,7 @@ module.exports = {
   createNewImage,
   listImages,
   getImageInfo,
-  pullImage,
+  createNewImage,
   deleteImage,
   deleteAllImages,
 

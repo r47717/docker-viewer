@@ -3,6 +3,7 @@ const path = require('path')
 const url = require('url')
 const createMenu = require('./windows/main/menu')
 const createNewContainer = require('./windows/new-container/new-container')
+const createNewImage = require('./windows/new-image/new-image')
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -28,7 +29,7 @@ function createWindow () {
     mainWindow = null
   })
 
-  mainWindow.setMenu(createMenu(null, createNewContainer(mainWindow)))
+  mainWindow.setMenu(createMenu(createNewImage(mainWindow), createNewContainer(mainWindow)))
 }
 
 // This method will be called when Electron has finished
